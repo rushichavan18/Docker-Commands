@@ -1,10 +1,4 @@
-Below is the **updated, clean, structured README.md** with **all your commands + extra helpful DevOps/Linux/Docker commands added at the end**, in a clear reference format.
-
-Copy–paste this into your `README.md`.
-
----
-
-# 📘 Linux + Docker Master Command Reference
+# 📘 Docker Master Command Reference
 
 *A clean guide explaining what every command does, so when you read it later you understand exactly why it was used.*
 
@@ -340,10 +334,3 @@ These are extra commands I recommend for DevOps workflows:
 
 * `ping google.com`
   Test network.
-
----
-
-If you want, I can also:
-✔ Convert this to a **PDF**
-✔ Make a **short cheat sheet version**
-✔ Add **color formatting** for GitHub styling
