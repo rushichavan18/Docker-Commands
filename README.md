@@ -1,336 +1,115 @@
-# 📘 Docker Master Command Reference
-
-*A clean guide explaining what every command does, so when you read it later you understand exactly why it was used.*
+Here is a **pure, clean Docker commands block** you can paste directly at the end of your README.
 
 ---
 
-# ✅ 1. System & Package Management
+# 🐳 **Additional Docker Commands (Extra Useful Commands)**
 
-* `sudo apt-get update`
-  Update package index from Ubuntu repositories.
+*(Added as you requested — simple format, clean meaning)*
 
-* `sudo apt clean`
-  Remove downloaded `.deb` cache to free disk space.
+### **Basic Docker Commands**
 
-* `df -Th`
-  Show disk usage with type and human-readable sizes.
-
-* `free -h`
-  Show RAM and swap usage with human-readable format.
-
-* `clear`
-  Clear terminal screen.
-
-* `top`
-  Real-time CPU/Memory/Process monitoring.
-
-* `htop`
-  Advanced version of `top` with colors (if installed).
-
-* `date`
-  Display current date/time.
-
-* `env`
-  Show all environment variables.
+* `docker ps` – Show running containers
+* `docker ps -a` – Show all containers
+* `docker ps -aq` – Only container IDs
+* `docker images` – List all images
+* `docker pull <image>` – Download image from Docker Hub
+* `docker run <image>` – Run a container
+* `docker run -it <image>` – Run container interactively
+* `docker run -d <image>` – Run container in background
+* `docker run -d -p <host>:<container> <image>` – Run container with port mapping
 
 ---
 
-# ✅ 2. Docker Installation & Service Commands
+### **Useful Run Options**
 
-* `sudo apt-get install docker.io`
-  Install the Docker engine.
-
-* `docker --version`
-  Check Docker version.
-
-* `sudo systemctl status docker`
-  Check Docker service status.
-
-* `sudo systemctl restart docker`
-  Restart Docker daemon.
+* `docker run --name myapp <image>` – Give container a name
+* `docker run -v vol1:/data <image>` – Attach a volume to container
+* `docker run --network app-net <image>` – Attach container to a network
+* `docker run -e KEY=value <image>` – Pass environment variables
 
 ---
 
-# ✅ 3. Docker Container Commands
+### **Container Management**
 
-* `docker ps`
-  List running containers.
-
-* `docker ps -a`
-  List all containers (running + stopped).
-
-* `docker ps -aq`
-  List container IDs only.
-
-* `docker run -it ubuntu`
-  Start an interactive Ubuntu container.
-
-* `docker run -it nginx`
-  Start an interactive nginx container.
-
-* `docker run -d -p 80:80 nginx`
-  Run nginx detached, expose port 80.
-
-* `docker run -d -p 81:80 nginx`
-  Run nginx on host 81 → container 80.
-
-* `docker stop <id>`
-  Stop a container.
-
-* `docker start <id>`
-  Start a stopped container.
-
-* `docker restart <id>`
-  Restart container.
-
-* `docker rm <id>`
-  Remove a container.
-
-* `docker rm $(docker ps -aq)`
-  Remove **all** containers.
-
-* `docker logs <container_id>`
-  View logs of a container.
-
-* `docker exec -it <id> bash`
-  Enter container shell.
-
-* `docker stats`
-  Show CPU/memory/live usage of containers.
+* `docker start <id>` – Start a stopped container
+* `docker stop <id>` – Stop a container
+* `docker restart <id>` – Restart a container
+* `docker kill <id>` – Force stop a container
+* `docker rm <id>` – Remove container
+* `docker rm $(docker ps -aq)` – Remove ALL containers
 
 ---
 
-# ✅ 4. Docker Image Commands
+### **Container Logs & Terminal Access**
 
-* `docker images`
-  List all images.
-
-* `docker images -aq`
-  Image IDs only.
-
-* `docker rmi <image_id>`
-  Remove an image.
-
-* `docker build -t my-java-app:latest .`
-  Build Java app Docker image.
-
-* `docker build -f Docker-multi-stage -t python-app-mini .`
-  Build Docker image using specific Dockerfile.
-
-* `docker image tag python-app-mini:latest rushichavan/python-app:latest`
-  Tag an image for Docker Hub.
-
-* `docker pull mysql`
-  Download MySQL latest image.
+* `docker logs <id>` – View logs
+* `docker logs -f <id>` – Follow logs live
+* `docker exec -it <id> bash` – Enter container using bash
+* `docker exec -it <id> sh` – Enter container with sh (Alpine)
+* `docker top <id>` – Show processes running inside container
 
 ---
 
-# ✅ 5. Docker Run For Applications
+### **Image Management**
 
-### **Java App**
-
-* `docker run -d -p 8000:8000 --name java-app my-java-app:latest`
-  Run Java container exposing port 8000.
-
-### **Portfolio App**
-
-* `docker run -d -p 3000:3000 --name portfolio portfolio-app:latest`
-  Run React portfolio container.
-
-### **Python App**
-
-* `docker run -d -p 80:80 python-app-mini:latest`
-  Run Python application on port 80.
-
-### **MySQL**
-
-* `docker run -d -e MYSQL_ROOT_PASSWORD=root mysql:latest`
-  Run MySQL container with root password.
+* `docker build -t myapp .` – Build image from Dockerfile
+* `docker build -f Dockerfile.dev -t myapp-dev .` – Build using custom Dockerfile
+* `docker rmi <image_id>` – Remove image
+* `docker rmi $(docker images -q)` – Remove ALL images
+* `docker tag myapp:latest username/myapp:latest` – Tag image
+* `docker push username/myapp:latest` – Push to Docker Hub
 
 ---
 
-# ✅ 6. Docker Compose Commands
+### **Docker Networks**
 
-* `docker compose up`
-  Start containers defined in compose file.
-
-* `docker compose up -d`
-  Run in background.
-
-* `docker compose down`
-  Stop and remove compose resources.
-
-* `docker network ls`
-  List docker networks.
+* `docker network ls` – List networks
+* `docker network create app-net` – Create network
+* `docker network inspect app-net` – View network details
+* `docker network connect app-net mycontainer` – Add container to network
+* `docker network disconnect app-net mycontainer` – Remove container from network
 
 ---
 
-# ✅ 7. Docker Volume Commands
+### **Docker Volumes**
 
-* `docker volume ls`
-  List volumes.
-
-* `docker volume create mysql-data`
-  Create MySQL volume.
-
-* `docker inspect mysql-data`
-  Inspect volume details.
+* `docker volume ls` – List volumes
+* `docker volume create mydata` – Create volume
+* `docker volume inspect mydata` – Inspect volume
+* `docker volume rm mydata` – Remove volume
+* `docker run -v mydata:/var/lib/mysql mysql` – Use volume with MySQL
 
 ---
 
-# ✅ 8. Git Commands
+### **Docker Inspect & System Info**
 
-* `git clone <repo-url>`
-  Clone a GitHub repo.
-
-* `git add .`
-  Stage all changes.
-
-* `git commit -m "message"`
-  Commit changes.
-
-* `git push`
-  Push to GitHub.
-
-* `git remote -v`
-  Show connected remotes.
-
-* `git branch -M main`
-  Rename local branch to `main`.
+* `docker inspect <id>` – Detailed info about container or image
+* `docker port <id>` – Check mapped ports
+* `docker stats` – Show live CPU, RAM, and network usage
+* `docker system df` – Show docker disk usage
+* `docker system prune` – Remove unused containers/images/networks
+* `docker system prune -a` – Remove **everything** unused
 
 ---
 
-# ✅ 9. File, Directory & System Management
+### **Docker Save & Load**
 
-* `ls`, `ll`
-  List directory contents.
-
-* `cd <dir>`
-  Change directory.
-
-* `rm -r <folder>`
-  Delete a folder recursively.
-
-* `cat <file>`
-  Display file content.
-
-* `watch ls`
-  Continuously monitor file changes.
+* `docker save <image> > image.tar` – Save image as tar file
+* `docker load < image.tar` – Load image from tar file
+* `docker export <container> > file.tar` – Export container filesystem
+* `docker import file.tar newimage:latest` – Import exported container
 
 ---
 
-# ✅ 10. User & Permission Commands
+### **Docker Compose**
 
-* `cat /etc/passwd`
-  List system users.
-
-* `cat /etc/group`
-  List system groups.
-
-* `sudo usermod -aG docker $USER`
-  Add user to Docker group.
-
-* `newgrp docker`
-  Activate docker group immediately.
-
-* `sudo chown ubuntu mysql-data`
-  Change folder ownership.
+* `docker compose up` – Start services
+* `docker compose up -d` – Start in background
+* `docker compose down` – Stop and remove services
+* `docker compose logs` – View logs for all services
+* `docker compose ps` – List containers in compose project
 
 ---
 
-# ✅ 11. Memory Cache Cleaning Commands
 
-Used to free cached memory:
-
-* `sudo sync; echo 1 | sudo tee /proc/sys/vm/drop_caches`
-  Drop page cache.
-
-* `sudo sync; echo 2 | sudo tee /proc/sys/vm/drop_caches`
-  Drop dentries & inodes.
-
-* `sudo sync; echo 3 | sudo tee /proc/sys/vm/drop_caches`
-  Drop all caches.
-
----
-
-# ✅ 12. Bash History & Shell Settings
-
-* `echo $HISTCONTROL`
-  Shows history behaviour.
-
-* `HISTSIZE=50000`
-  Store 50k commands.
-
-* `PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"`
-  Save & reload command history automatically.
-
-* `history`
-  Show history.
-
----
-
-# ⭐ BONUS SECTION — Additional Useful Commands (Not in your list)
-
-These are extra commands I recommend for DevOps workflows:
-
-### **Docker**
-
-* `docker inspect <container>`
-  Show detailed container info (IP, volumes, config).
-
-* `docker port <container>`
-  Show port mappings of a container.
-
-* `docker top <container>`
-  Show processes running inside container.
-
-* `docker cp <container:path> <local-path>`
-  Copy files **from container** to local machine.
-
-* `docker cp <local-path> <container:path>`
-  Copy files **into container**.
-
----
-
-### **Linux**
-
-* `journalctl -u docker`
-  View Docker service logs.
-
-* `uname -a`
-  Show kernel and OS info.
-
-* `uptime`
-  Show load average + system uptime.
-
-* `ps aux --sort=-%cpu`
-  Show processes sorted by CPU usage.
-
-* `du -sh *`
-  Check folder sizes.
-
----
-
-### **Git**
-
-* `git status`
-  Show which files changed.
-
-* `git log --oneline --graph`
-  Pretty commit history.
-
-* `git pull --rebase`
-  Sync latest changes safely.
-
----
-
-### **Networking**
-
-* `ip a`
-  Show IP addresses.
-
-* `sudo lsof -i :80`
-  See which process is using port 80.
-
-* `ping google.com`
-  Test network.
+Just tell me — I can generate it instantly.
