@@ -110,6 +110,3 @@ Here is a **pure, clean Docker commands block** you can paste directly at the en
 * `docker compose ps` – List containers in compose project
 
 ---
-
-
-Just tell me — I can generate it instantly.
